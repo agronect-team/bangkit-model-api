@@ -6,7 +6,7 @@ from db import get_db_connection
 from middleware.authentication_middleware import auth_required
 
 predict_blueprint = Blueprint('predict_banana', __name__)
-
+#Try Push Update Routes
 def save_prediction_to_db(image_bytes, prediction, confidence, description, solution,user_id):
     connection = get_db_connection()
     with connection.cursor() as cursor:
