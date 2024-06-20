@@ -17,7 +17,7 @@ def save_prediction_to_db(image_bytes, prediction, confidence, description, solu
     connection.commit()
     connection.close()
 
-@predict_blueprint.route('/predict/apple', methods=["POST"])
+@predict_blueprint.route('/predict/apple', methods=["GET", "POST"])
 @auth_required
 def predict_apelsick_route():
     file = request.files.get('file')
@@ -40,7 +40,7 @@ def predict_apelsick_route():
         "solution": solution
     })
 
-@predict_blueprint.route('/predict/banana', methods=["POST"])
+@predict_blueprint.route('/predict/banana', methods=["GET", "POST"])
 @auth_required
 def predict_banana_route():
     file = request.files.get('file')
@@ -63,7 +63,7 @@ def predict_banana_route():
         "solution": solution
     })
 
-@predict_blueprint.route('/predict/corn', methods=["POST"])
+@predict_blueprint.route('/predict/corn', methods=["GET", "POST"])
 @auth_required
 def predict_corn_route():
     file = request.files.get('file')
@@ -86,7 +86,7 @@ def predict_corn_route():
         "solution": solution
     })
 
-@predict_blueprint.route('/predict/orange', methods=["POST"])
+@predict_blueprint.route('/predict/orange', methods=["GET", "POST"])
 @auth_required
 def predict_orange_route():
     file = request.files.get('file')
@@ -109,7 +109,7 @@ def predict_orange_route():
         "solution": solution
     })
 
-@predict_blueprint.route('/predict/potato', methods=["POST"])
+@predict_blueprint.route('/predict/potato', methods=["GET", "POST"])
 @auth_required
 def predict_potato_route():
     file = request.files.get('file')
@@ -132,7 +132,7 @@ def predict_potato_route():
         "solution": solution
     })
 
-@predict_blueprint.route('/predict/rice', methods=["POST"])
+@predict_blueprint.route('/predict/rice', methods=["GET", "POST"])
 @auth_required
 def predict_rice_route():
     file = request.files.get('file')
@@ -155,7 +155,7 @@ def predict_rice_route():
         "solution": solution
     })
 
-@predict_blueprint.route('/predict/cassava', methods=["POST"])
+@predict_blueprint.route('/predict/cassava', methods=["GET", "POST"])
 @auth_required
 def predict_cassava_route():
     file = request.files.get('file')
@@ -178,7 +178,7 @@ def predict_cassava_route():
         "solution": solution
     })
 
-@predict_blueprint.route('/predict/tomato', methods=["POST"])
+@predict_blueprint.route('/predict/tomato', methods=["GET", "POST"])
 @auth_required
 def predict_tomato_route():
     file = request.files.get('file')
