@@ -6,13 +6,13 @@ from db import get_db_connection
 from middleware.authentication_middleware import auth_required
 
 predict_blueprint = Blueprint('predict_banana', __name__)
-#Try Push Update Routes
-def save_prediction_to_db(image_bytes, prediction, confidence, description, solution,user_id):
+
+def save_prediction_to_db(image_bytes, prediction, confidence, description, solution, user_id, plant_name):
     connection = get_db_connection()
     with connection.cursor() as cursor:
         cursor.execute(
-            'INSERT INTO predictions (image, prediction, confidence, description, solution,user_id) VALUES (%s, %s, %s, %s, %s, %s)',
-            (image_bytes, prediction, confidence, description, solution,user_id)
+            'INSERT INTO predictions (image, prediction, confidence, description, solution, user_id, plant_name) VALUES (%s, %s, %s, %s, %s, %s, %s)',
+            (image_bytes, prediction, confidence, description, solution, user_id, plant_name)
         )
     connection.commit()
     connection.close()
@@ -29,16 +29,18 @@ def predict_apelsick_route():
     img = img.resize((224, 224), Image.NEAREST)
     prediction, confidence, description, solution, _ = predict_apelsick(img)
     user_id = request.user_id
-    save_prediction_to_db(image_bytes, prediction, confidence, description, solution,user_id)
+    plant_name = 'Apple'
+    save_prediction_to_db(image_bytes, prediction, confidence, description, solution, user_id, plant_name)
     return jsonify({
-        "user_id" : user_id,
-        "prediction": prediction, 
+        "plant_name": plant_name,
+        "user_id": user_id,
+        "prediction": prediction,
         "confidence": confidence,
         "description": description,
         "solution": solution
     })
 
-@predict_blueprint.route('/predict/banana', methods=["GET", "POST"])
+@predict_blueprint.route('/predict/banana', methods=["POST"])
 @auth_required
 def predict_banana_route():
     file = request.files.get('file')
@@ -50,16 +52,18 @@ def predict_banana_route():
     img = img.resize((150, 150), Image.NEAREST)
     prediction, confidence, description, solution, _ = predict_banana(img)
     user_id = request.user_id
-    save_prediction_to_db(image_bytes, prediction, confidence, description, solution,user_id)
+    plant_name = 'Banana'
+    save_prediction_to_db(image_bytes, prediction, confidence, description, solution, user_id, plant_name)
     return jsonify({
-        "user_id" : user_id,
-        "prediction": prediction, 
+        "plant_name": plant_name,
+        "user_id": user_id,
+        "prediction": prediction,
         "confidence": confidence,
         "description": description,
         "solution": solution
     })
 
-@predict_blueprint.route('/predict/corn', methods=["GET", "POST"])
+@predict_blueprint.route('/predict/corn', methods=["POST"])
 @auth_required
 def predict_corn_route():
     file = request.files.get('file')
@@ -71,16 +75,18 @@ def predict_corn_route():
     img = img.resize((150, 150), Image.NEAREST)
     prediction, confidence, description, solution, _ = predict_corn(img)
     user_id = request.user_id
-    save_prediction_to_db(image_bytes, prediction, confidence, description, solution,user_id)
+    plant_name = 'Corn'
+    save_prediction_to_db(image_bytes, prediction, confidence, description, solution, user_id, plant_name)
     return jsonify({
-        "user_id" : user_id,
-        "prediction": prediction, 
+        "plant_name": plant_name,
+        "user_id": user_id,
+        "prediction": prediction,
         "confidence": confidence,
         "description": description,
         "solution": solution
     })
 
-@predict_blueprint.route('/predict/orange', methods=["GET", "POST"])
+@predict_blueprint.route('/predict/orange', methods=["POST"])
 @auth_required
 def predict_orange_route():
     file = request.files.get('file')
@@ -92,16 +98,18 @@ def predict_orange_route():
     img = img.resize((64, 64), Image.NEAREST)
     prediction, confidence, description, solution, _ = predict_orange(img)
     user_id = request.user_id
-    save_prediction_to_db(image_bytes, prediction, confidence, description, solution,user_id)
+    plant_name = 'Orange'
+    save_prediction_to_db(image_bytes, prediction, confidence, description, solution, user_id, plant_name)
     return jsonify({
-        "user_id" : user_id,
-        "prediction": prediction, 
+        "plant_name": plant_name,
+        "user_id": user_id,
+        "prediction": prediction,
         "confidence": confidence,
         "description": description,
         "solution": solution
     })
 
-@predict_blueprint.route('/predict/potato', methods=["GET", "POST"])
+@predict_blueprint.route('/predict/potato', methods=["POST"])
 @auth_required
 def predict_potato_route():
     file = request.files.get('file')
@@ -113,16 +121,18 @@ def predict_potato_route():
     img = img.resize((64, 64), Image.NEAREST)
     prediction, confidence, description, solution, _ = predict_potato(img)
     user_id = request.user_id
-    save_prediction_to_db(image_bytes, prediction, confidence, description, solution,user_id)
+    plant_name = 'Potato'
+    save_prediction_to_db(image_bytes, prediction, confidence, description, solution, user_id, plant_name)
     return jsonify({
-        "user_id" : user_id,
-        "prediction": prediction, 
+        "plant_name": plant_name,
+        "user_id": user_id,
+        "prediction": prediction,
         "confidence": confidence,
         "description": description,
         "solution": solution
     })
 
-@predict_blueprint.route('/predict/rice', methods=["GET", "POST"])
+@predict_blueprint.route('/predict/rice', methods=["POST"])
 @auth_required
 def predict_rice_route():
     file = request.files.get('file')
@@ -134,16 +144,18 @@ def predict_rice_route():
     img = img.resize((224, 224), Image.NEAREST)
     prediction, confidence, description, solution, _ = predict_rice(img)
     user_id = request.user_id
-    save_prediction_to_db(image_bytes, prediction, confidence, description, solution,user_id)
+    plant_name = 'Rice'
+    save_prediction_to_db(image_bytes, prediction, confidence, description, solution, user_id, plant_name)
     return jsonify({
-        "user_id" : user_id,
-        "prediction": prediction, 
+        "plant_name": plant_name,
+        "user_id": user_id,
+        "prediction": prediction,
         "confidence": confidence,
         "description": description,
         "solution": solution
     })
 
-@predict_blueprint.route('/predict/cassava', methods=["GET", "POST"])
+@predict_blueprint.route('/predict/cassava', methods=["POST"])
 @auth_required
 def predict_cassava_route():
     file = request.files.get('file')
@@ -155,16 +167,18 @@ def predict_cassava_route():
     img = img.resize((150, 150), Image.NEAREST)
     prediction, confidence, description, solution, _ = predict_cassava(img)
     user_id = request.user_id
-    save_prediction_to_db(image_bytes, prediction, confidence, description, solution,user_id)
+    plant_name = 'Cassava'
+    save_prediction_to_db(image_bytes, prediction, confidence, description, solution, user_id, plant_name)
     return jsonify({
-        "user_id" : user_id,
-        "prediction": prediction, 
+        "plant_name": plant_name,
+        "user_id": user_id,
+        "prediction": prediction,
         "confidence": confidence,
         "description": description,
         "solution": solution
     })
 
-@predict_blueprint.route('/predict/tomato', methods=["GET", "POST"])
+@predict_blueprint.route('/predict/tomato', methods=["POST"])
 @auth_required
 def predict_tomato_route():
     file = request.files.get('file')
@@ -176,10 +190,12 @@ def predict_tomato_route():
     img = img.resize((224, 224), Image.NEAREST)
     prediction, confidence, description, solution, _ = predict_tomato(img)
     user_id = request.user_id
-    save_prediction_to_db(image_bytes, prediction, confidence, description, solution,user_id)
+    plant_name = 'Tomato'
+    save_prediction_to_db(image_bytes, prediction, confidence, description, solution, user_id, plant_name)
     return jsonify({
-        "user_id" : user_id,
-        "prediction": prediction, 
+        "plant_name": plant_name,
+        "user_id": user_id,
+        "prediction": prediction,
         "confidence": confidence,
         "description": description,
         "solution": solution
