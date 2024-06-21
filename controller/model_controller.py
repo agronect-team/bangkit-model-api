@@ -26,7 +26,7 @@ potato_labels = ['Early Blight', 'Healthy', 'Late Blight']
 
 rice_model_path = 'models/rice_disease.h5'
 rice_model = keras.models.load_model(rice_model_path)
-rice_labels = ['Brown Spot', 'Healthy', 'Leaf Blast', 'Neck_Blast']
+rice_labels = ['Brown Spot', 'Healthy', 'Leaf Blast', 'Neck Blast']
 
 cassava_model_path = 'models/cassava_inception_model.h5'
 cassava_model = keras.models.load_model(cassava_model_path)
